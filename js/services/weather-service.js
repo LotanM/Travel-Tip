@@ -27,9 +27,9 @@ function onGetWeather() {
 
 function renderWeather(weatherObj) {
     const weatherInfo = weatherObj
-    // let weatherStr = JSON.stringify(weatherInfo)
+    let weatherStr = JSON.stringify(weatherInfo)
     console.log(weatherInfo);
-    document.querySelector('.weather-container').innerHTML = weatherStr
+    // document.querySelector('.weather-container').innerHTML = weatherStr
 }
 
 
@@ -61,7 +61,7 @@ function getCityId(cities) {
     })
 }
 
-// renderWeatherWidget(Id)
+renderWeatherWidget('1850147')
 
 function renderWeatherWidget(cityId) {
     window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
