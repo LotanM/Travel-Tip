@@ -1,4 +1,6 @@
-'use strict'
+export const weatherService = {
+    onGetWeather
+}
 
 let lat = 32.073582;
 let lon = 34.788052;

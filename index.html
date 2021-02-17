@@ -9,7 +9,7 @@
     <title>TravelTip!</title>
 </head>
 
-<body onload="init()">
+<body>
 
     <!-- HEADER -->
     <header class="header-container flex space-between">
@@ -17,16 +17,16 @@
             <h2>[T]ravel[T]ip</h2>
         </div>
         <div class="search-bar flex align-center">
-            <input type="text" id="pac-input" class="controls" placeholder="Search place"/>
-            <button type="submit">GO</button>
-            <button type="">MY LOCATION</button>
+            <input type="text" id="pac-input" class="controls" placeholder="Search place" />
+            <button class="btn" type="submit">GO</button>
+            <button type="" class="btn">MY LOCATION</button>
         </div>
     </header>
 
     <!-- LOCATION INFO -->
     <section class="location-info-container flex align-center space-between">
         <h2>Location: Made up Location</h2>
-        <button type="">COPY LOCATION</button>
+        <button type="" class="btn">COPY LOCATION</button>
     </section>
 
     <!-- MAIN -->
@@ -41,37 +41,14 @@
             </div>
         </section>
 
-<<<<<<< HEAD
         <!-- MAP -->
         <section class="map-container">
             <div id="map" style="width: 500px; height: 300px;">
-                Map Here
-=======
-
-        <!-- MAP -->    
-        <section class="map-container">
-            <div id="map" style="width: 500px; height: 300px;">
-
->>>>>>> 7c7347c26cec738f751984f38010f80951e38eea
             </div>
         </section>
     </section>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!-- <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOQahBQ8uKEnmcO7W5dBvkzRwIYXJw9pQ&callback=initMap">
-        </script> -->
-    <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRCGVaa9zk3vR7iit1bTYkhEiOYg3eXbw&libraries=places&v=weekly"
-        async></script>
-
-    <script src="js/services/storage-service.js"></script>
-    <script src="js/services/util-service.js"></script>
-    <script src="js/services/location-service.js"></script>
-    <script src="js/services/weather-service.js"></script>
-    <script src="js/main-controller.js"></script>
-    <script src="js/location-controller.js"></script>
-    <script src="js/location-controller.js"></script>
+    <script type="module" src="js/map-controller.js"></script>
 </body>
 
 </html>

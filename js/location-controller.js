@@ -67,10 +67,17 @@ function initMap() {
         }
         const bounds = new google.maps.LatLngBounds();
         places.forEach((place) => {
+
             if (!place.geometry || !place.geometry.location) {
                 console.log("Returned place contains no geometry");
                 return;
             }
+            //add to locations
+            var coords = JSON.stringify(place.geometry.location.toJSON(), null, 2)
+            var locationName =JSON.stringify(place['formatted_address']);
+            _createLocation(locationName, coords);
+            renderLocations();
+
             gMarkers.push(
                 new google.maps.Marker({
                     map,
@@ -114,7 +121,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 function addMarker(coords) {
-    
+
 
     var marker = new google.maps.Marker({
         position: coords,
