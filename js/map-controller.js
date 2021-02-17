@@ -20,10 +20,10 @@ window.onload = () => {
 
     initMap()
         .then(() => {
+            addClickListener();
             addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
         .catch(() => console.log('INIT MAP ERROR'));
-
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
@@ -31,7 +31,6 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
-    addClickListener();
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -49,10 +48,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addClickListener() {
+    console.log('Im on it')
     const geocoder = new google.maps.Geocoder();
     const infowindow = new google.maps.InfoWindow();
 
     google.maps.event.addListener(map, 'click', function (event) {
+        console.log('clicked map')
         addMarker(getPosition());
         addLocation(JSON.stringify(event.latLng.toJSON(), null, 2));
         geocodeLatLng(geocoder, map, infowindow, getPosition());

@@ -47,6 +47,16 @@ section {
     border: 1px solid black;
 }
 
+
+
+/*WEATHER WIDGET */
+
+.widget-left {
+    box-shadow: none;
+}
+
+
+
 /* HELPERS */
 
 /* FLEX */
