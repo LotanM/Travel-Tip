@@ -9,7 +9,11 @@
     <title>TravelTip!</title>
 </head>
 
+<<<<<<< HEAD
 <body>
+=======
+<body onload="onInitMap()">
+>>>>>>> 8c49467403218be151dca9afcde662b7918799e9
 
     <!-- HEADER -->
     <header class="header-container flex space-between">
@@ -22,6 +26,7 @@
             <button type="">MY LOCATION</button>
         </div>
     </header>
+<<<<<<< HEAD
     
     
     <!-- LOCATION INFO -->
@@ -30,15 +35,21 @@
         <h2>Location: Made up Location</h2>
         <button type="">COPY LOCATION</button>
     </section>
+=======
+>>>>>>> 8c49467403218be151dca9afcde662b7918799e9
 
     <!-- MAIN -->
     <section class="main-container flex space-between">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8c49467403218be151dca9afcde662b7918799e9
         <!-- ASIDE -->
         <section class="aside-container">
             <div class="weather-container">
                 Show Weather Today
+<<<<<<< HEAD
             </div>
             <div class="locations-container">
                 Show Locations Table
@@ -49,10 +60,36 @@
         <section class="map-container">
             <div id="map" style="width: 500px; height: 300px;">
                 Map Here
+=======
+            </div>
+            <div class="locations-container">
+                Show Locations Table
+>>>>>>> 8c49467403218be151dca9afcde662b7918799e9
             </div>
         </section>
     </section>
 
+<<<<<<< HEAD
+=======
+        <!-- MAP -->
+        <section class="map-container">
+            <div id="map" style="width: 500px; height: 300px;">
+                Map Here
+            </div>
+        </section>
+    </section>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQjx8QcedS5Kr4GSHHbxLiEkx3tZP6Nog&callback=initMap">
+        </script>
+
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/location-service.js"></script>
+    <script src="js/services/travel-service.js"></script>
+    <script src="js/location-controller.js"></script>
+    <script src="js/travel-controller.js"></script>
+>>>>>>> 8c49467403218be151dca9afcde662b7918799e9
 </body>
 
 </html>
