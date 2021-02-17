@@ -9,7 +9,7 @@
     <title>TravelTip!</title>
 </head>
 
-<body onload="initMap()">
+<body onload="init()">
 
     <!-- HEADER -->
     <header class="header-container flex space-between">
@@ -35,28 +35,17 @@
         <!-- ASIDE -->
         <section class="aside-container">
             <div class="weather-container">
-                Show Weather Today
             </div>
             <div class="locations-container">
                 Show Locations Table
             </div>
         </section>
 
-        <!-- MAP -->
-        <section class="map-container">
-            <div id="map" style="width: 500px; height: 300px;">
-                Map Here
-            </div>
-            <div class="locations-container">
-                Show Locations Table
-            </div>
-        </section>
-    </section>
 
-        <!-- MAP -->
+        <!-- MAP -->    
         <section class="map-container">
             <div id="map" style="width: 500px; height: 300px;">
-                Map Here
+
             </div>
         </section>
     </section>
@@ -69,9 +58,10 @@
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/util-service.js"></script>
     <script src="js/services/location-service.js"></script>
-    <script src="js/services/travel-service.js"></script>
+    <script src="js/services/weather-service.js"></script>
+    <script src="js/main-controller.js"></script>
     <script src="js/location-controller.js"></script>
-    <script src="js/travel-controller.js"></script>
+    <script src="js/location-controller.js"></script>
 </body>
 
 </html>
