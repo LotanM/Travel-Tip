@@ -28,8 +28,8 @@ function onGetWeather() {
 function renderWeather(weatherObj) {
     const weatherInfo = weatherObj
     // let weatherStr = JSON.stringify(weatherInfo)
-    console.log(weatherInfo);
-    document.querySelector('.weather-container').innerHTML = weatherStr
+    // console.log(weatherInfo);
+    // document.querySelector('.weather-container').innerHTML = weatherStr
 }
 
 
@@ -47,7 +47,6 @@ function getCities(file, callback) {
 }
 
 
-
 getCities("js/services/city.list.json", function(text){
     const cities = JSON.parse(text);
     getCityId(cities)
@@ -61,7 +60,7 @@ function getCityId(cities) {
     })
 }
 
-// renderWeatherWidget(Id)
+renderWeatherWidget(1850147)
 
 function renderWeatherWidget(cityId) {
     window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];

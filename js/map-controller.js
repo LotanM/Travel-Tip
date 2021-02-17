@@ -1,3 +1,4 @@
+'use strict'
 import { mapService } from './services/map-service.js'
 import { weatherService } from './services/weather-service.js'
 
@@ -17,7 +18,6 @@ window.onload = () => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
     })
-
     initMap()
         .then(() => {
             addClickListener();
@@ -33,6 +33,8 @@ window.onload = () => {
         })
 }
 
+
+
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
     return _connectGoogleApi()
@@ -47,11 +49,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
         })
 }
 
+
+
 function addClickListener() {
     console.log('Im on it')
-    const geocoder = new google.maps.Geocoder();
-    const infowindow = new google.maps.InfoWindow();
-
+    // const geocoder = new google.maps.Geocoder();
+    // const infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(map, 'click', function (event) {
         console.log('clicked map')
         addMarker(getPosition());
@@ -59,6 +62,8 @@ function addClickListener() {
         geocodeLatLng(geocoder, map, infowindow, getPosition());
     });
 }
+
+
 
 function addMarker(loc) {
     console.log('im in')
@@ -82,10 +87,16 @@ function addMarker(loc) {
     return marker;
 }
 
+
+
+
+
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
 }
+
+
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
@@ -94,6 +105,11 @@ function getPosition() {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
+
+
+
+
+
 
 
 function _connectGoogleApi() {

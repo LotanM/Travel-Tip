@@ -31,31 +31,51 @@ img {
 }
 
 .header-container>*, .main-container>*, .location-info-container>* {
-    margin: 0 40px;
-}
-
-.aside-container>* {
-    width: 300px;
-    margin: 10px;
+    margin: 0 30px;
 }
 
 .main-container {
     height: 100%;
 }
 
+.locations-container {
+    text-align: center;
+}
+
 section {
     border: 1px solid black;
 }
 
-
-
 /*WEATHER WIDGET */
-
 .widget-left {
-    box-shadow: none;
+    box-shadow: none !important
 }
 
+.widget-left-menu__links--brown {
+    background-image: none !important;
+    background-color: #82E0AA !important
+}
 
+.widget-left-menu {
+    background-color: #82E0AA !important
+}
+
+.widget-left-menu--compact {
+    background-image: none !important;
+    background-color: #82E0AA
+}
+
+.widget-left-menu__links--compact {
+    height: 30px;
+}
+
+.widget-left-menu__layout {
+    border-bottom: none !important
+}
+
+.widget-left-menu__logo_black_small {
+    display: none
+}
 
 /* HELPERS */
 
