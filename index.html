@@ -17,12 +17,12 @@
             <h2>[T]ravel[T]ip</h2>
         </div>
         <div class="search-bar flex align-center">
-            <input type="text" name="" id="" placeholder="Search">
+            <input type="text" id="pac-input" class="controls" placeholder="Search place"/>
             <button type="submit">GO</button>
             <button type="">MY LOCATION</button>
         </div>
     </header>
-    
+
     <!-- LOCATION INFO -->
     <section class="location-info-container flex align-center space-between">
         <h2>Location: Made up Location</h2>
@@ -47,24 +47,16 @@
             <div id="map" style="width: 500px; height: 300px;">
                 Map Here
             </div>
-            <div class="locations-container">
-                Show Locations Table
-            </div>
-        </section>
-    </section>
-
-        <!-- MAP -->
-        <section class="map-container">
-            <div id="map" style="width: 500px; height: 300px;">
-                Map Here
-            </div>
         </section>
     </section>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script defer
+    <!-- <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOQahBQ8uKEnmcO7W5dBvkzRwIYXJw9pQ&callback=initMap">
-        </script>
+        </script> -->
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRCGVaa9zk3vR7iit1bTYkhEiOYg3eXbw&libraries=places&v=weekly"
+        async></script>
 
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/util-service.js"></script>
