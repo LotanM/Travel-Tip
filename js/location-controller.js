@@ -3,7 +3,7 @@
 var map, infoWindow;
 var gMarkers = [];
 
-function onInitMap() {
+function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: { lat: 29.556004, lng: 34.950038 }
@@ -111,7 +111,7 @@ function renderLocations() {
                     <button type="button" onclick="onDelPlace('${location.id}')">Delete</button>
                     </li>`;
         }).join('');
-    document.querySelector('.locations-list').innerHTML = strHTML;
+    document.querySelector('.locations-container').innerHTML = strHTML;
 }
 
 function onDelPlace(placeId) {
