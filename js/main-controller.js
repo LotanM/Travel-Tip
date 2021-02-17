@@ -5,5 +5,3 @@ function init() {
     initMap()
     onGetWeather()
 }
-
-
