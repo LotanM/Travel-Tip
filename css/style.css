@@ -20,12 +20,18 @@ img {
 /* CONTAINERS */
 
 .header-container {
-    width: 100%;
+    flex: 1;
     height: 70px;
     background-color: #73c688;
 }
 
-.header-container>*, .main-container>* {
+.location-info-container {
+    margin-top: 20px;
+    flex: 1;
+
+}
+
+.header-container>*, .main-container>*, .location-info-container>* {
     margin: 0 40px;
 }
 
@@ -35,7 +41,6 @@ img {
 }
 
 .main-container {
-    margin-top: 20px;
     height: 100%;
 }
 

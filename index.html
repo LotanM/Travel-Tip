@@ -9,41 +9,50 @@
     <title>TravelTip!</title>
 </head>
 
-    <body>
+<body>
 
-        <!-- HEADER -->
-        <header class="header-container flex space-between">
-            <div class="logo flex align-center">
-                <h2>[T]ravel[T]ip</h2>
+    <!-- HEADER -->
+    <header class="header-container flex space-between">
+        <div class="logo flex align-center">
+            <h2>[T]ravel[T]ip</h2>
+        </div>
+        <div class="search-bar flex align-center">
+            <input type="text" name="" id="" placeholder="Search">
+            <button type="submit">GO</button>
+            <button type="">MY LOCATION</button>
+        </div>
+    </header>
+    
+    
+    <!-- LOCATION INFO -->
+    
+    <section class="location-info-container flex align-center space-between">
+        <h2>Location: Made up Location</h2>
+        <button type="">COPY LOCATION</button>
+    </section>
+
+    <!-- MAIN -->
+    <section class="main-container flex space-between">
+
+
+        <!-- ASIDE -->
+        <section class="aside-container">
+            <div class="weather-container">
+                Show Weather Today
             </div>
-            <div class="search-bar flex align-center">
-                <input type="text" name="" id="" placeholder="Search">
-                <button type="submit">GO</button>
-                <button type="">MY LOCATION</button>
+            <div class="locations-container">
+                Show Locations Table
             </div>
-        </header>
-
-        <!-- MAIN -->
-        <section class="main-container flex space-between">
-
-            <!-- ASIDE -->
-            <section class="aside-container">
-                <div class="weather-container">
-                    Show Weather Today
-                </div>
-                <div class="locations-container">
-                    Show Locations Table
-                </div>
-            </section>
-
-            <!-- MAP -->
-            <section class="map-container"> 
-                <div id="map" style="width: 500px; height: 300px;">
-                    Map Here
-                </div>
-            </section>
         </section>
 
-    </body>
+        <!-- MAP -->
+        <section class="map-container">
+            <div id="map" style="width: 500px; height: 300px;">
+                Map Here
+            </div>
+        </section>
+    </section>
+
+</body>
 
 </html>
