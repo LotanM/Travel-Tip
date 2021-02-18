@@ -4,13 +4,11 @@ import { mapService } from './services/map-service.js'
 import { weatherService } from './services/weather-service.js'
 
 var gMap;
-
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    onDelPlace(1);
-    weatherService.onGetWeather();
+    // weatherService.onGetWeather();
     document.querySelector('.btn').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
@@ -29,7 +27,40 @@ window.onload = () => {
         })
 }
 
+function getCities(file = "js/services/city.list.json") {
+    return new Promise((resolve, reject) => {
+        var rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                let cityList = JSON.parse(rawFile.responseText);
+                console.log('cityList', cityList);
+                resolve(cityList);
+            }
+        }
+        rawFile.send(null);
+    })
+}
 
+// getCities("js/services/city.list.json", function (text) {
+//     const cities = JSON.parse(text);
+//     return cities;
+// });
+
+
+function getCityId(lat, lon) {
+    lat = 31.816669
+    lon = 34.650002
+
+    // var latStr = lat + '';
+    // var lonStr = lon + '';
+    // let cityName = 'Tokyo'
+    getCities()
+        .then(cityList => cityList.find(city => {
+            if (lon===city.coord.lon && lat===city.coord.lat) { console.log('city.id', city.id); weatherService.renderWeatherWidget(city.id); };
+        }))
+}
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
@@ -77,9 +108,13 @@ function geocodeLatLng(geocoder, map, infowindow, coords) {
     });
 }
 function addLocation(coords) {
+    console.log('coords', coords);
     var locationName = prompt('Enter location name');
     mapService._createLocation(locationName, coords);
     renderLocations();
+    let ctId = getCityId(JSON.parse(coords).lat, JSON.parse(coords).lng)
+    console.log('ctId', ctId)
+    weatherService.renderWeatherWidget(ctId);
 }
 
 function renderLocations() {
