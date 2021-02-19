@@ -40,13 +40,13 @@ function getCities(file = "js/services/city.list.json") {
     })
 }
 
-function getCityId(lat, lon) {
-    lat = 31.816669
-    lon = 34.650002
-    getCities()
-        .then(cityList => cityList.find(city => {
-            if (lon === city.coord.lon && lat === city.coord.lat) weatherService.renderWeatherWidget(city.id);;
-        }))
+function getCityId(locationName) {
+    return new Promise((resolve, reject) => {
+        getCities()
+            .then(cityList => cityList.forEach(city => {
+                if (city.name.includes(locationName) || locationName.includes(city.name)) resolve(city.id);
+            }))
+    })
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -81,7 +81,8 @@ function getUsersLocation() {
                         infoWindow.setPosition(pos);
                         gMap.setCenter(pos);
                         addMarker(pos);
-                        addLocation(pos);
+                        getNameFromCoords(pos)
+                            .then(nameFromCoords => addLocation(nameFromCoords, pos))
                     },
                     () => {
                         handleLocationError(true, infoWindow, gMap.getCenter());
@@ -93,6 +94,32 @@ function getUsersLocation() {
             }
         });
         resolve();
+    })
+}
+
+function getNameFromCoords(coords) {
+    return new Promise((resolve, reject) => {
+        const geocoder = new google.maps.Geocoder();
+        const infowindow = new google.maps.InfoWindow();
+        geocoder.geocode({ location: coords }, (results, status) => {
+            if (status === "OK") {
+                if (results[0]) {
+                    gMap.setZoom(13);
+                    const marker = new google.maps.Marker({
+                        position: coords,
+                        map: gMap,
+                        icon: svgMarker
+                    });
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(gMap, marker);
+                } else {
+                    window.alert("No results found");
+                }
+            } else {
+                window.alert("Geocoder failed due to: " + status);
+            }
+            resolve(results[0].formatted_address);
+        });
     })
 }
 
@@ -119,7 +146,7 @@ function initAutocomplete() {
                     return;
                 }
                 addMarker(JSON.parse(JSON.stringify(place.geometry.location)));
-                mapService._createLocation(place.formatted_address, place.geometry.location);
+                addLocation(place.formatted_address, place.geometry.location);
                 renderLocations();
                 if (place.geometry.viewport) {
                     // Only geocodes have viewport.
@@ -139,11 +166,10 @@ function addClickListener() {
         const geocoder = new google.maps.Geocoder();
         const infowindow = new google.maps.InfoWindow();
         google.maps.event.addListener(gMap, 'click', function (event) {
-            console.log('event.latLng', event.latLng);
-            addMarker(JSON.parse(JSON.stringify(event.latLng.toJSON())));
-            console.log('coords for add marker', JSON.parse(JSON.stringify(event.latLng.toJSON())))
-            addLocation(JSON.parse(JSON.stringify(event.latLng.toJSON())));
-            console.log('coords for addLocation', JSON.stringify(event.latLng.toJSON(), null, 2))
+            let pos = JSON.parse(JSON.stringify(event.latLng.toJSON()));
+            addMarker(pos);
+            getNameFromCoords(pos)
+                .then(nameFromCoords => addLocation(nameFromCoords, pos))
             geocodeLatLng(geocoder, gMap, infowindow, event.latLng);
         });
         resolve();
@@ -154,7 +180,7 @@ function geocodeLatLng(geocoder, map, infowindow, coords) {
     geocoder.geocode({ location: coords }, (results, status) => {
         if (status === "OK") {
             if (results[0]) {
-                // map.setZoom(12);
+                map.setZoom(13);
                 const marker = new google.maps.Marker({
                     position: coords,
                     icon: svgMarker,
@@ -171,12 +197,12 @@ function geocodeLatLng(geocoder, map, infowindow, coords) {
     });
 }
 
-function addLocation(coords) {
-    var locationName = prompt('Enter location name');
+function addLocation(locationName, coords) {
+    // var locationName = prompt('Enter location name');
     mapService._createLocation(locationName, coords);
     renderLocations();
-    let ctId = getCityId(coords.lat, coords.lng)
-    weatherService.renderWeatherWidget(ctId);
+    getCityId(locationName)
+        .then(cityId => weatherService.renderWeatherWidget(cityId))
 }
 
 function renderLocations() {
