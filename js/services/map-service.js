@@ -1,12 +1,14 @@
+'use strict'
 import { storageService } from './storage-service.js'
 import { utilService } from './util-service.js'
-
 export const mapService = {
     getLocs,
     _createLocation,
     _loadFromStorage,
     deletePlace
 }
+
+
 var locs = [{ lat: 11.22, lng: 22.11 }]
 // var locs;
 const LOCS_KEY = 'locations';
@@ -34,7 +36,7 @@ function _loadFromStorage(){
 }
 
 function _createLocation(locationName, coords) {
-    var coords =  JSON.parse(coords)
+    console.log('coordsimportant', coords)
     let locations = locs;
     if (!locations || !locations.length) {
         locations = [];
@@ -42,7 +44,7 @@ function _createLocation(locationName, coords) {
     let location = {
         id: utilService.getRandomId(),
         locationName,
-        coords: {lat: coords.lat, lng: coords.lng},
+        coords:coords,
         weather: null,
         createdAt: null,
         updatedAt: null,
@@ -52,4 +54,3 @@ function _createLocation(locationName, coords) {
     locs = locations;
     storageService.saveToStorage(LOCS_KEY, locs);
 }
-

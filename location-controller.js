@@ -1,11 +1,12 @@
 'use strict';
 
-var map, infoWindow;
+var gMap, infoWindow;
 var gMarkers = [];
 var svgMarker; //custom marker
 
+
 function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
+    gMap = new google.maps.Map(document.getElementById("map"), {
         zoom: 12,
         center: { lat: 29.556004, lng: 34.950038 }
     });
@@ -25,7 +26,7 @@ function initMap() {
     const locationButton = document.createElement("button");
     locationButton.innerHTML = "<img src='images/location.png' width='60' height='60'>";
     locationButton.classList.add("custom-map-control-button");
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    gMap.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
     locationButton.addEventListener("click", () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -35,28 +36,27 @@ function initMap() {
                         lng: position.coords.longitude,
                     };
                     infoWindow.setPosition(pos);
-                    map.setCenter(pos);
+                    gMap.setCenter(pos);
                     addMarker(pos);
                 },
                 () => {
-                    handleLocationError(true, infoWindow, map.getCenter());
+                    handleLocationError(true, infoWindow, gMap.getCenter());
                 }
             );
         } else {
             // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
+            handleLocationError(false, infoWindow, gMap.getCenter());
         }
     });
     addClickListener();
 
-
     // Create the search box and link it to the UI element.
     const input = document.getElementById("pac-input");
     const searchBox = new google.maps.places.SearchBox(input);
-    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input); //this locates the textbox inside the map so we don't want that
+    gMap.controls[google.maps.ControlPosition.TOP_LEFT].push(input); //this locates the textbox inside the map so we don't want that
     // Bias the SearchBox results towards current map's viewport.
-    map.addListener("bounds_changed", () => {
-        searchBox.setBounds(map.getBounds());
+    gMap.addListener("bounds_changed", () => {
+        searchBox.setBounds(gMap.getBounds());
     });
 
     searchBox.addListener("places_changed", () => {
@@ -80,7 +80,7 @@ function initMap() {
 
             gMarkers.push(
                 new google.maps.Marker({
-                    map,
+                    map: gMap,
                     icon: svgMarker,
                     title: place.name,
                     position: place.geometry.location,
@@ -94,7 +94,7 @@ function initMap() {
                 bounds.extend(place.geometry.location);
             }
         });
-        map.fitBounds(bounds);
+        gMap.fitBounds(bounds);
     });
 }
 
@@ -103,10 +103,10 @@ function addClickListener() {
     const geocoder = new google.maps.Geocoder();
     const infowindow = new google.maps.InfoWindow();
 
-    google.maps.event.addListener(map, 'click', function (event) {
+    google.maps.event.addListener(gMap, 'click', function (event) {
         addMarker(event.latLng);
         addLocation(JSON.stringify(event.latLng.toJSON(), null, 2));
-        geocodeLatLng(geocoder, map, infowindow, event.latLng);
+        geocodeLatLng(geocoder, gMap, infowindow, event.latLng);
     });
 }
 
@@ -117,7 +117,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             ? "Error: The Geolocation service failed."
             : "Error: Your browser doesn't support geolocation."
     );
-    infoWindow.open(map);
+    infoWindow.open(gMap);
 }
 
 function addMarker(coords) {
@@ -126,10 +126,10 @@ function addMarker(coords) {
     var marker = new google.maps.Marker({
         position: coords,
         icon: svgMarker,
-        map: map
+        map: gMap
     });
     gMarkers.push(marker);
-    setMapOnAll(map);
+    setMapOnAll(gMap);
 }
 
 function addLocation(coords) {
